@@ -9,6 +9,8 @@
     }
   },
   "rewrites": [
+    { "source": "/api", "destination": "/api/index?__api_path=" },
+    { "source": "/api/:path*", "destination": "/api/index?__api_path=:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
