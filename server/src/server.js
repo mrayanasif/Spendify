@@ -31,8 +31,20 @@ app.use(
       const isLocalDevOrigin =
         process.env.NODE_ENV !== 'production' &&
         /^https?:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin || '');
+      const vercelHosts = [
+        process.env.VERCEL_URL,
+        process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ].filter(Boolean);
+      const isVercelOrigin = vercelHosts.some((host) => {
+        const normalized = host.startsWith('http') ? host : `https://${host}`;
+        try {
+          return new URL(normalized).origin === origin;
+        } catch {
+          return false;
+        }
+      });
       // No origin: same-origin requests, curl, or the built front end served by this app.
-      if (!origin || allowed.includes(origin) || isLocalDevOrigin) return cb(null, true);
+      if (!origin || allowed.includes(origin) || isLocalDevOrigin || isVercelOrigin) return cb(null, true);
       return cb(new Error(`Origin ${origin} is not allowed by CORS.`));
     },
     credentials: true

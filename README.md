@@ -30,6 +30,18 @@ npm run dev                   # http://localhost:5173
 Open <http://localhost:5173> and sign in with one of the accounts below.
 The API automatically initializes the shared income and expense categories on its first start, so they are available to every student account.
 
+## Deploy on Vercel (single root project)
+
+This repository is configured to deploy the client and API together from the repository root.
+
+1. Import the repository into Vercel and leave **Root Directory** set to the repository root (`.`).
+2. Add these required environment variables in Vercel Project Settings for Production and Preview:
+   - `MONGODB_URI` — your MongoDB Atlas connection string.
+   - `JWT_SECRET` — a long, unique secret value.
+3. Deploy. `vercel.json` installs both app packages, builds the client, serves `client/dist`, routes `/api/*` to the Express API, and sends browser routes to the React app.
+
+The default build and install commands are configured in `vercel.json`. `CLIENT_URL` is optional on Vercel; the API allows the active Vercel deployment origin automatically. Add optional mail and AI environment variables in Vercel if those features are needed.
+
 ### Sign-in details
 
 | Role | Email | Password |
@@ -204,7 +216,7 @@ Passwords are hashed with bcrypt. Sessions are stateless JWTs checked on every r
 and a disabled account is rejected at the middleware. Students and administrators are
 separated by role at both the route and the UI level, and every student query is scoped
 to the signed-in user's id, so one student's data is never reachable from another
-account. Helmet sets the standard headers, CORS is restricted to `CLIENT_URL`, and the
+account. Helmet sets the standard headers, CORS is restricted to configured origins plus local development and the active Vercel origin, and the
 auth endpoints have their own tighter rate limit. The password-reset endpoint answers
 identically whether or not the email exists, so it cannot be used to discover accounts,
 and only a SHA-256 hash of the reset token is stored.

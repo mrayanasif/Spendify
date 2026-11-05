@@ -4,6 +4,10 @@ const dns = require('node:dns');
 function configureAtlasDns(uri) {
   if (!uri.startsWith('mongodb+srv://')) return;
 
+  // Use Vercel's managed resolver in production unless the project explicitly
+  // supplies DNS servers. Some local Windows DNS forwarders fail Atlas SRV.
+  if (process.env.VERCEL && !process.env.MONGODB_DNS_SERVERS) return;
+
   // Node on some Windows setups inherits a localhost DNS forwarder that does
   // not answer Atlas SRV lookups. Allow an override for networks with a
   // required resolver; otherwise use public recursive resolvers.
