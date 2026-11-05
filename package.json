@@ -1,0 +1,14 @@
+{
+  "name": "spendify",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Spendify - a student budget and expense tracker (MERN)",
+  "scripts": {
+    "setup": "npm --prefix server install && npm --prefix client install",
+    "seed": "npm --prefix server run seed",
+    "seed:fresh": "npm --prefix server run seed -- --fresh",
+    "server": "npm --prefix server start",
+    "client": "npm --prefix client run dev",
+    "build": "npm --prefix client run build"
+  }
+}

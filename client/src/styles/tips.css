@@ -1,0 +1,141 @@
+.tip-tip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  transition: opacity 0.25s ease;
+}
+
+.tip-tip.pinned {
+  border-color: color-mix(in srgb, var(--primary) 60%, var(--line));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+.tip-tip-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.tip-tip-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.tip-tip-rank {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-weight: 600;
+  font-size: 0.72rem;
+  flex-shrink: 0;
+}
+
+.tip-tip.pinned .tip-tip-rank {
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+}
+
+.tip-tip-title {
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tip-tip-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.tip-icon-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: var(--text-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tip-icon-btn:hover {
+  color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.tip-icon-btn.active {
+  color: var(--primary);
+}
+
+.tip-tip-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tip-tip-category {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.tip-tip-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: 0.72rem;
+}
+
+.tip-tip-body {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-2);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+[data-theme='dark'] .tip-tip {
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+[data-theme='dark'] .tip-icon-btn {
+  color: var(--text-3);
+}
+
+[data-theme='dark'] .tip-icon-btn:hover {
+  color: var(--primary-bright);
+  background: rgba(255, 96, 38, 0.12);
+}
+
+[data-theme='dark'] .tip-icon-btn.active {
+  color: var(--primary-bright);
+}
